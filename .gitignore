@@ -1,0 +1,7 @@
+# Ignorar archivos de datos pesados
+*.tar.gz
+libros/
+*.log
+
+# Ignorar archivos temporales de sistema
+.DS_Store

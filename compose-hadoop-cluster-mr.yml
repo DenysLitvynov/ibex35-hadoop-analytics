@@ -1,0 +1,62 @@
+services:
+
+  namenode-mr:
+    image: espemm/namenode-mr-image:25-26
+    container_name: namenode-mr
+    ports:
+      - "9870:9870" # HDFS
+      - "8088:8088" # YARN
+      - "8888:8888" # Jupyter
+      - "4040:4040" # Spark
+    entrypoint: ["/inicio.sh"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 3072m
+    networks:
+      hadoop-cluster-mr:
+        aliases:
+          - resourcemanager-mr
+
+  datanode-mr1:
+    image: espemm/datanode-mr-image:25-26
+    container_name: datanode-mr1
+    entrypoint: ["/inicio.sh"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 3072m
+    networks:
+      hadoop-cluster-mr:
+
+  datanode-mr2:
+    image: espemm/datanode-mr-image:25-26
+    container_name: datanode-mr2
+    entrypoint: ["/inicio.sh"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 3072m
+    networks:
+      hadoop-cluster-mr:
+
+  datanode-mr3:
+    image: espemm/datanode-mr-image:25-26
+    container_name: datanode-mr3
+    entrypoint: ["/inicio.sh"]
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 3072m
+    networks:
+      hadoop-cluster-mr:
+
+
+networks:
+  hadoop-cluster-mr:
+    external: true
+    name: hadoop-cluster-mr
