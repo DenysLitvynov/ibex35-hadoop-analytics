@@ -1,0 +1,2 @@
+nohup: no se tendrá en cuenta la entrada
+bash: run_scraper.sh: No existe el fichero o el directorio

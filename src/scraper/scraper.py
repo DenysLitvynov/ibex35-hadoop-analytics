@@ -38,3 +38,4 @@ with webdriver.Firefox(options=options) as driver:
                     print(f"{nombre},{ultima},{maximo},{minimo},{fecha_hora}")
             except:
                 continue
+

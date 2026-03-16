@@ -1,4 +1,5 @@
+nohup: no se tendrá en cuenta la entrada
 Iniciando automatizador del IBEX-35...
---- Ejecutando extracción: lun 23 feb 2026 09:31:58 CET ---
-Datos guardados en ../../data/raw/ibex35_2026-02-23.csv
+--- Ejecutando extracción: lun 09 mar 2026 17:20:36 CET ---
+Datos guardados en ../../data/raw/ibex35_2026-03-09.csv
 Esperando 1 hora para la siguiente toma...
