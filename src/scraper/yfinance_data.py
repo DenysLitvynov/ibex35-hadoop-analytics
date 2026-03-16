@@ -1,5 +1,7 @@
 import yfinance as yf
 import pandas as pd
+from datetime import date, timedelta
+from pathlib import Path
 
 # Diccionario de empresas del IBEX 35
 empresas = {
@@ -35,9 +37,13 @@ empresas = {
     "UNI.MC":"Unicaja"
 }
 
-# Rango de fechas para 2025
-inicio = "2025-01-01"
-fin = "2025-12-31"
+# Rango de fechas dinámico: desde hoy hace un año hasta hoy (inclusive)
+hoy = date.today()
+inicio = (hoy - timedelta(days=365)).strftime("%Y-%m-%d")
+fin = (hoy + timedelta(days=1)).strftime("%Y-%m-%d")  # yfinance usa rango [start, end), +1 para incluir hoy
+
+print(f"Período de descarga: {inicio} → {hoy}")
+print("-" * 30)
 
 filas = []
 
@@ -85,9 +91,16 @@ dataset = pd.DataFrame(filas)
 # Ordenar por fecha (ascendente) y empresa (alfabético)
 dataset = dataset.sort_values(["fecha", "empresa"])
 
-# Exportar a CSV
-dataset.to_csv("ibex35_2025.csv", index=False)
+# Guardar en data/raw relativo a la raíz del proyecto
+# El script está en src/scraper/, subimos dos niveles para llegar a la raíz
+output_dir = Path(__file__).resolve().parents[2] / "data" / "raw"
+output_dir.mkdir(parents=True, exist_ok=True)
+
+nombre_fichero = f"ibex35_{hoy.strftime('%Y-%m-%d')}.csv"
+output_path = output_dir / nombre_fichero
+dataset.to_csv(output_path, index=False)
 
 print("-" * 30)
 print("Proceso finalizado con éxito.")
-print(f"Dataset creado: ibex35_2025.csv con {len(dataset)} registros.")
+print(f"Dataset creado: {output_path}")
+print(f"Total registros: {len(dataset)}")
