@@ -26,7 +26,7 @@ class Top5Subida(MRJob):
         ]
     
     def mapper_init(self):
-        self.options.fecha = datetime.strptime(self.options.fecha, '%Y-%m-%d') 
+        self.fecha = datetime.strptime(self.options.fecha, '%Y-%m-%d') 
 
     # Emitimos la ultima acción general, la primera de la semana y la primera del mes
     # para cada empresa, con etiquetas para cada periodo
@@ -37,13 +37,13 @@ class Top5Subida(MRJob):
         accion = filas[0]
         fecha_fichero = datetime.strptime(filas[1], '%Y-%m-%d')
         # Comprobamos si la fecha es la de referencia
-        if fecha_fichero <= self.options.fecha:
+        if fecha_fichero == self.fecha:
             yield accion, ('ultima',filas[1], float(filas[2]))
         # Comprobamos si la fecha es la primera de la semana
-        if fecha_fichero <= self.options.fecha - timedelta(days=7):
+        if self.fecha - timedelta(days=9) <= fecha_fichero <= self.fecha - timedelta(days=5):
             yield accion, ('semana',filas[1], float(filas[2]))
         # Comprobamos si la fecha es la primera del mes        
-        if fecha_fichero <= self.options.fecha - timedelta(days=30):
+        if self.fecha - timedelta(days=32) <= fecha_fichero <= self.fecha - timedelta(days=28):
             yield accion, ('mes',filas[1], float(filas[2]))
     
     # Calculamos el porcentaje de subida para cada periodo (semana y mes) y emitimos con etiqueta
@@ -66,15 +66,17 @@ class Top5Subida(MRJob):
                 mes = valor
                 ultimo_mes = fecha
 
-        pct_sem = round(((ultimo - semana) / semana) * 100, 2) if semana != 0 else 0
-        pct_mes = round(((ultimo - mes) / mes) * 100, 2) if mes != 0 else 0
+        pct_sem = round(((ultimo - semana) / semana) * 100, 2) if semana is not None else None
+        pct_mes = round(((ultimo - mes) / mes) * 100, 2) if mes is not None else None
         yield accion, (pct_sem, pct_mes)
 
     # Dividimos en semana y mes
     def mapper_final(self, accion, pct_sem_mes):
         pct_sem, pct_mes = pct_sem_mes
-        yield 'semana', (accion, pct_sem)
-        yield 'mes', (accion, pct_mes)
+        if pct_sem is not None and pct_sem > 0:
+            yield 'semana', (accion, pct_sem)
+        if pct_mes is not None and pct_mes > 0:
+            yield 'mes', (accion, pct_mes)
 
     # Ordenamos y emitimos el top 5 de cada periodo
     def reducer_top5(self, periodo, valores):

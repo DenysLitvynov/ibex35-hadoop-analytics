@@ -18,7 +18,7 @@ class MinMaxPeriodos(MRJob):
     
     def mapper_init(self):
         # Convertir la fecha de referencia a un objeto datetime para comparaciones posteriores
-        self.options.fecha = datetime.strptime(self.options.fecha, '%Y-%m-%d')
+        self.fecha = datetime.strptime(self.options.fecha, '%Y-%m-%d')
     
     # Comprobamos por la fecha de la fila si pertenece a la última hora, semana o mes, y emitimos con distintas etiquetas 
     def mapper(self, _, line):
@@ -28,11 +28,11 @@ class MinMaxPeriodos(MRJob):
         accion = filas[0]
         fecha_fichero = datetime.strptime(filas[1], '%Y-%m-%d')
         if accion == self.options.accion:
-            if fecha_fichero >= self.options.fecha - timedelta(hours=1):
+            if fecha_fichero >= self.fecha: 
                 yield filas[0], ('dia', filas[5], filas[6])
-            if fecha_fichero >= self.options.fecha - timedelta(days=7):
+            if fecha_fichero >= self.fecha - timedelta(days=7):
                 yield filas[0], ('semana', filas[5], filas[6])
-            if fecha_fichero >= self.options.fecha - timedelta(days=30):
+            if fecha_fichero >= self.fecha - timedelta(days=30):
                 yield filas[0], ('mes', filas[5], filas[6])
 
     # Función auxiliar fuera del reducer para calcular el mínimo y máximo 
