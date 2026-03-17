@@ -6,3 +6,4 @@ venv/
 .venv/
 # Ignorar archivos temporales de sistema
 .DS_Store
+venv/
