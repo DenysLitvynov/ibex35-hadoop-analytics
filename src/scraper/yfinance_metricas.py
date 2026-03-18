@@ -4,15 +4,15 @@ from datetime import date
 from pathlib import Path
 
 empresas = {
-    "ANA.MC": "Acciona", "ANE.MC": "Acciona Energía", "ACX.MC": "Acerinox", "ACS.MC": "ACS",
+    "ANA.MC": "Acciona", "ANE.MC": "Acciona Energia", "ACX.MC": "Acerinox", "ACS.MC": "ACS",
     "AENA.MC": "Aena", "ALM.MC": "Almirall", "AMS.MC": "Amadeus", "MTS.MC": "ArcelorMittal",
     "BKT.MC": "Bankinter", "BBVA.MC": "BBVA", "CABK.MC": "CaixaBank", "CLNX.MC": "Cellnex",
-    "COL.MC": "Colonial", "ELE.MC": "Endesa", "ENG.MC": "Enagás", "FER.MC": "Ferrovial",
+    "COL.MC": "Colonial", "ELE.MC": "Endesa", "ENG.MC": "Enagas", "FER.MC": "Ferrovial",
     "GRF.MC": "Grifols", "IAG.MC": "IAG", "IBE.MC": "Iberdrola", "IDR.MC": "Indra",
-    "ITX.MC": "Inditex", "LOG.MC": "Logista", "MAP.MC": "Mapfre", "MEL.MC": "Meliá",
+    "ITX.MC": "Inditex", "LOG.MC": "Logista", "MAP.MC": "Mapfre", "MEL.MC": "Melia",
     "MRL.MC": "Merlin", "NTGY.MC": "Naturgy", "PUIG.MC": "Puig", "RED.MC": "Redeia",
     "REP.MC": "Repsol", "SAB.MC": "Sabadell", "SAN.MC": "Santander", "SCYR.MC": "Sacyr",
-    "SLR.MC": "Solaria", "TEF.MC": "Telefónica", "UNI.MC": "Unicaja"
+    "SLR.MC": "Solaria", "TEF.MC": "Telefonica", "UNI.MC": "Unicaja"
 }
 
 hoy = date.today().isoformat()
