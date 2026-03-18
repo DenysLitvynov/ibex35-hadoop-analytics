@@ -40,7 +40,7 @@ class Top5Bajada(MRJob):
         accion = filas[0]
         fecha_fichero = datetime.strptime(filas[1], '%Y-%m-%d')
         # Comprobamos si la fecha es la de referencia
-        if fecha_fichero == self.fecha:
+        if self.fecha - timedelta(days=4) <= fecha_fichero <= self.fecha:
             yield accion, ('ultima',filas[1], float(filas[2]))
         # Comprobamos si la fecha es la primera de la semana
         if self.fecha - timedelta(days=9) <= fecha_fichero <= self.fecha - timedelta(days=5):
