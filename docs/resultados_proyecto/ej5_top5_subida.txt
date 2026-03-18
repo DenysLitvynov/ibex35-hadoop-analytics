@@ -1,0 +1,6 @@
+=== EJERCICIO 5 — top5_subida ===
+Comando: python3 ej5_top5_subida.py -r hadoop --fecha 2026-03-17 hdfs:///user/luser/proyecto_final/data/ibex35_2026-03-17.csv
+Fecha ejecucion: mié 18 mar 2026 17:12:11 CET
+---
+"mes"	["Repsol: 35.98%", "Indra: 15.62%", "Solaria: 13.19%", "Acciona: 10.77%", "Endesa: 10.27%"]
+"semana"	["Repsol: 4.71%", "Solaria: 4.53%", "Naturgy: 2.15%", "Merlin: 2.13%", "Redeia: 1.82%"]

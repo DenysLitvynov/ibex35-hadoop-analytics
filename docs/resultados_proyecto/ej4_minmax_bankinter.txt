@@ -1,0 +1,5 @@
+=== EJERCICIO 4 — minmax_bankinter ===
+Comando: python3 ej4_minmax.py -r hadoop --accion Bankinter --fecha 2026-03-17 hdfs:///user/luser/proyecto_final/data/ibex35_2026-03-17.csv
+Fecha ejecucion: mié 18 mar 2026 17:10:23 CET
+---
+"Bankinter"	{"ultima_hora": {"min": null, "max": null}, "ultima_semana": {"min": 12.85, "max": 13.85}, "ultimo_mes": {"min": 12.67, "max": 14.81}}

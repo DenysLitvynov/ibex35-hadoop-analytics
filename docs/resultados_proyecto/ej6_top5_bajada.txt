@@ -1,0 +1,6 @@
+=== EJERCICIO 6 — top5_bajada ===
+Comando: python3 ej6_top5_bajada.py -r hadoop --fecha 2026-03-17 hdfs:///user/luser/proyecto_final/data/ibex35_2026-03-17.csv
+Fecha ejecucion: mié 18 mar 2026 17:14:00 CET
+---
+"mes"	["IAG: 19.65%", "Grifols: 17.32%", "Almirall: 16.33%", "ArcelorMittal: 16.29%", "Aena: 10.79%"]
+"semana"	["ArcelorMittal: 3.94%", "Amadeus: 2.98%", "IAG: 2.39%", "Inditex: 2.13%", "Acerinox: 1.65%"]

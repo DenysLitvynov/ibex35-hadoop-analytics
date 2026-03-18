@@ -1,0 +1,1 @@
+"Bankinter"	"Valor minimo: 7.43, Valor maximo: 14.99, Decremento: 24.26%, Incremento: 52.8%"

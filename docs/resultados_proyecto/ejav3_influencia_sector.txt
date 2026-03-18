@@ -1,0 +1,14 @@
+=== EJERCICIO av3 — influencia_sector ===
+Comando: python3 avanzado3_influencia_sector.py -r hadoop hdfs:///user/luser/proyecto_final/data/ibex35_fundamentales_2026-03-17.csv hdfs:///user/luser/proyecto_final/data/ibex35_2026-03-17.csv
+Fecha ejecucion: mié 18 mar 2026 17:20:15 CET
+---
+"Basic Materials"	{"Media revalorizacion": "33.55%", "Num empresas": 2}
+"Communication Services"	{"Media revalorizacion": "-12.1%", "Num empresas": 1}
+"Consumer Cyclical"	{"Media revalorizacion": "24.96%", "Num empresas": 2}
+"Energy"	{"Media revalorizacion": "110.85%", "Num empresas": 1}
+"Financial Services"	{"Media revalorizacion": "41.21%", "Num empresas": 7}
+"Healthcare"	{"Media revalorizacion": "6.19%", "Num empresas": 2}
+"Industrials"	{"Media revalorizacion": "46.17%", "Num empresas": 7}
+"Real Estate"	{"Media revalorizacion": "12.42%", "Num empresas": 3}
+"Technology"	{"Media revalorizacion": "52.8%", "Num empresas": 2}
+"Utilities"	{"Media revalorizacion": "47.53%", "Num empresas": 7}
