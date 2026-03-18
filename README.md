@@ -1,87 +1,105 @@
-📈 IBEX35 Big Data Analytics (Hadoop + MapReduce)
+````markdown
+# 📈 IBEX35 Big Data Analytics (Hadoop + MapReduce)
 
-Este proyecto permite realizar un análisis profundo de las cotizaciones del IBEX 35 utilizando el paradigma MapReduce sobre un clúster de Hadoop (Dockerizado). Incluye desde análisis semanales básicos hasta estudios avanzados de correlación entre volatilidad y datos fundamentales (PER, ROE).
-🛠️ 1. Pruebas en Local (Quick Start)
+Proyecto de análisis de cotizaciones del **IBEX 35** usando **MapReduce** sobre un clúster **Hadoop** (Docker).  
+Incluye desde análisis básicos hasta estudios avanzados de correlación financiera.
 
-Antes de subir el código al clúster, puedes probar los scripts de Python localmente para verificar que la lógica de Map y Reduce es correcta.
-Requisitos previos
+---
 
-    Python 3.x
+## 🛠️ 1. Pruebas en Local (Quick Start)
 
-    Instalar la librería mrjob:
-    Bash
+Antes de usar Hadoop, valida los scripts en local.
 
-    pip install mrjob
+### Requisitos
+- Python 3.x
+- Librería:
+```bash
+pip install mrjob
+````
 
-Ejecución local
+### Ejecución
 
-Para probar cualquier ejercicio sin necesidad de Hadoop:
-Bash
-
+```bash
 python scripts/ejercicio_X.py datos/archivo.csv
+```
 
-Ejemplo para el Ejercicio 1:
-Bash
+**Ejemplo:**
 
+```bash
 python ej1_semanal.py --fecha-referencia 2026-03-17 data/ibex35_2026-03-17.csv
+```
 
-🚀 2. Despliegue Completo en Hadoop
+---
 
-Sigue estos pasos para ejecutar el análisis en un entorno distribuido real.
-Paso A: Levantar el Clúster
+## 🚀 2. Despliegue en Hadoop
 
-Utiliza los alias configurados para gestionar los contenedores de Docker:
-Bash
+### ▶️ A. Levantar clúster
 
-hadoop-up    # Levanta los nodos: Namenode, Datanode, ResourceManager y NodeManager
+```bash
+hadoop-up
+```
 
-Paso B: Preparación del Entorno (HDFS)
+---
 
-    Acceder al contenedor maestro:
-    Bash
+### 📂 B. Preparar HDFS
 
-    docker exec -it namenode-mr /bin/bash
+Entrar al contenedor:
 
-    Subir los datos a HDFS:
-    Hadoop no lee archivos de tu disco duro directamente; deben estar en su sistema de archivos (HDFS):
-    Bash
+```bash
+docker exec -it namenode-mr /bin/bash
+```
 
-    hdfs dfs -mkdir -p /user/luser/proyecto/data
-    hdfs dfs -put /ruta/local/tus_datos.csv /user/luser/proyecto/data/
+Subir datos:
 
-Paso C: Ejecución Automatizada
+```bash
+hdfs dfs -mkdir -p /user/luser/proyecto/data
+hdfs dfs -put /ruta/local/tus_datos.csv /user/luser/proyecto/data/
+```
 
-El proyecto incluye un Script Maestro (ejecutar_todo_hadoop.sh) que lanza los 10 ejercicios de forma secuencial:
-Bash
+---
 
-# Dentro del contenedor, con el venv activo
+### ⚙️ C. Ejecutar todo
+
+```bash
 bash ejecutar_todo_hadoop.sh
+```
 
-Paso D: Recuperación de Resultados
+---
 
-Los resultados se generan en HDFS, pero para analizarlos o entregarlos debemos bajarlos al "mundo real":
+### 📥 D. Recuperar resultados
 
-    De HDFS al Contenedor:
-    Bash
+**1. HDFS → Contenedor**
 
-    hdfs dfs -get /user/luser/proyecto/resultados/ej_output/part-* ./resultado_ej.txt
+```bash
+hdfs dfs -get /user/luser/proyecto/resultados/ej_output/part-* ./resultado_ej.txt
+```
 
-    Del Contenedor a tu Ordenador (Desde tu terminal local):
-    Bash
+**2. Contenedor → Local**
 
-    docker cp namenode-mr:/home/luser/resultado_ej.txt ./mis_resultados/
+```bash
+docker cp namenode-mr:/home/luser/resultado_ej.txt ./mis_resultados/
+```
 
-📊 Ejercicios Incluidos
-Nivel	Descripción
-Básico	Listados semanales/mensuales, rangos de cotización y Top 5 (subidas/bajadas).
-Avanzado 1	Volatilidad vs PER: Relación entre el riesgo y la valoración de la empresa.
-Avanzado 2	ROE vs Rendimiento: Eficiencia operativa interna frente a éxito bursátil.
-Avanzado 3	Análisis Sectorial: Comparativa de crecimiento por sectores industriales.
-🛑 Apagado Seguro
+---
 
-Para evitar la pérdida de datos en HDFS, nunca uses down. Usa el alias de stop:
-Bash
+## 📊 Ejercicios
 
+| Nivel      | Descripción              |
+| ---------- | ------------------------ |
+| Básico     | Listados, rangos y Top 5 |
+| Avanzado 1 | Volatilidad vs PER       |
+| Avanzado 2 | ROE vs Rendimiento       |
+| Avanzado 3 | Análisis sectorial       |
+
+---
+
+## 🛑 Apagado seguro
+
+```bash
 hadoop-down
+```
 
-    Nota: Esto detiene los contenedores pero mantiene el estado del disco virtual de Hadoop intacto para la próxima sesión.
+⚠️ No uses `down` directamente para evitar pérdida de datos.
+
+---
+
